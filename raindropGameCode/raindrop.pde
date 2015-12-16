@@ -1,5 +1,5 @@
 class Raindrop {// declaring all fields  contained within Raindrop Class
-  PVector loc, vel, acc;
+  PVector loc, vel, acc; //declare variables and PVectors and intergers
   int diam;
   Raindrop(float x, float y) {
     diam = 30;
@@ -13,15 +13,15 @@ class Raindrop {// declaring all fields  contained within Raindrop Class
     ellipse(loc.x, loc.y, diam, diam);
   }
   void fall() {
-    loc.y=loc.y + vel.y;
-    vel.add(acc);
+    loc.y=loc.y + vel.y;  // add velocity to create fall
+    vel.add(acc); //add gravity to the game
   }
    void reset(){
-    loc.y = 0;
+    loc.y = 0;   //reset the drops
     vel.set(0,10);
   }
-  boolean isInContactWith(PVector mouse) {
-    float d = dist(loc.x, loc.y, mouse.x, mouse.y);
+  boolean isInContactWith(PVector mouse) {  //get rid of the rain
+    float d = dist(loc.x, loc.y, mouse.x, mouse.y);   //determine if the mouse is within the circle/in contact
       boolean c;
       if( d < diam/2){
         c = true;
