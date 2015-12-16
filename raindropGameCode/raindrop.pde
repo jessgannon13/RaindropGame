@@ -4,8 +4,8 @@ class Raindrop {// declaring all fields  contained within Raindrop Class
   Raindrop(float x, float y) {
     diam = 30;
     loc= new PVector(x, y);
-    vel = new PVector(random(-5,5),random(-5,5));
-    acc = new PVector(0, 0.3);
+    vel = new PVector(random(-3, 4), random(-3, 4));
+    acc = new PVector(0, .2);
   }
   void display() {
     fill(253);
@@ -16,19 +16,19 @@ class Raindrop {// declaring all fields  contained within Raindrop Class
     loc.y=loc.y + vel.y;  // add velocity to create fall
     vel.add(acc); //add gravity to the game
   }
-   void reset(){
-    loc.y = 0;   //reset the drops
-    vel.set(0,10);
+  void reset() {
+    loc.set(random(width),0);
+    vel.set(0,1);
+    acc.set(0,1);
   }
   boolean isInContactWith(PVector mouse) {  //get rid of the rain
     float d = dist(loc.x, loc.y, mouse.x, mouse.y);   //determine if the mouse is within the circle/in contact
-      boolean c;
-      if( d < diam/2){
-        c = true;
-      }else{
-        c =false;
-      }
-      return c;
+    boolean c;
+    if ( d < diam/2) {
+      c = true;
+    } else {
+      c =false;
+    }
+    return c;
   }
- 
 }
