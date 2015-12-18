@@ -4,8 +4,8 @@ class Raindrop {// declaring all fields  contained within Raindrop Class
   Raindrop(float x, float y) {
     diam = 30;
     loc= new PVector(x, y);
-    vel = new PVector(random(-3, 4), random(-3, 4));
-    acc = new PVector(0, .2);
+    vel = new PVector(random(-3, 3), random(-3, 3));
+    acc = new PVector(0, .01);
   }
   void display() {
     fill(253);
@@ -17,9 +17,8 @@ class Raindrop {// declaring all fields  contained within Raindrop Class
     vel.add(acc); //add gravity to the game
   }
   void reset() {
-    loc.set(random(width),0);
-    vel.set(0,1);
-    acc.set(0,1);
+  loc.y=0;
+  vel.set(0,10);
   }
   boolean isInContactWith(PVector mouse) {  //get rid of the rain
     float d = dist(loc.x, loc.y, mouse.x, mouse.y);   //determine if the mouse is within the circle/in contact
