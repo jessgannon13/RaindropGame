@@ -1,15 +1,18 @@
 class Catcher{
   PVector loc;
-  int diam;
+  PImage pacman; 
+
+  //int diam;
   
-  Catcher(int tdiam){
-    loc = new PVector();
-    diam = tdiam;
+  Catcher(){
+  loc = new PVector();
+//    diam = tdiam;
+ 
   }
-  
+ 
   void display(){
-fill(0);
-ellipse(loc.x,loc.y,diam,diam);
+  pacman= loadImage("pacman-facts.png"); //load pacman image
+  image(pacman, loc.x, loc.y, 80, 80 ); //set it so that it follows the mouse
   }
   
   void update(){

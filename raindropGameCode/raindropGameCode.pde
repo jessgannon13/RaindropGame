@@ -12,7 +12,7 @@ void setup() {
   size(1200, 800);
   
   mouse = new PVector();
-c = new Catcher(50);
+c = new Catcher();
 raindrops.add(new Raindrop(mouseX,mouseY));
 //for(int i = 0; i <count; i++){//initialize mouse PVector. value is irrelevant since it will be set at the start of void draw(){}
 //  r[i] = new Raindrop(random(width), 0);
