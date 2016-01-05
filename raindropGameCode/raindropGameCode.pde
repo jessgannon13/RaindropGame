@@ -24,39 +24,37 @@ void setup() {
 
 
 void draw() {
- if (gameover == 1){
-  mouse.set(mouseX, mouseY);//set value of mouse as mouseX,mouseY
-  background(0, 200, 255);
-  textSize(100);
-  text(score, width/2, height/3);
-  raindrops.add(new Raindrop(random(width), 0));
-  c.update();
-  c.display();
-  for (int i = raindrops.size()-1; i >= 0; i--) {
-    Raindrop r = raindrops.get(i);
-    r.display();
-    r.fall();
+  if (gameover == 1) {
+    mouse.set(mouseX, mouseY);//set value of mouse as mouseX,mouseY
+    background(0, 200, 255);
+    textSize(100);
+    text(score, width/2, height/3);
+    raindrops.add(new Raindrop(random(width), 0));
+    c.update();
+    c.display();
+    for (int i = raindrops.size()-1; i >= 0; i--) {
+      Raindrop r = raindrops.get(i);
+      r.display();
+      r.fall();
 
 
 
-    if (r.isInContactWith(mouse)) {
-      raindrops.remove(i);
+      if (r.isInContactWith(mouse)) {
+        raindrops.remove(i);
+      }
+      if (r.loc.y > height + r.diam/2) {
+        r.reset();
+        score = score +1;
+      }
     }
-    if (r.loc.y > height + r.diam/2){
-      r.reset();
-      score = score +1;
-    }
-  }
-    if (score==51){
+    if (score==51) {
       gameover= 0;
       textSize(200);
       fill(#FF0808);
       textAlign(CENTER);
       text("GAME OVER", width/2, height/2);
-    
     }
-    
- }
+  }
   //for(int i = 0; i < count; i++){
   //r[i].fall();         //make the raindrop fall. It should accelerate as if pulled towards the ground by earth's gravity
   //r[i].display();  
@@ -68,8 +66,11 @@ void draw() {
   //  r[i].reset();                           //if it does, reset the raindrop
   //}
   //}
-     if(mousePressed){
-       gameover=1;
-       score = 0;
-     }
+  if (mousePressed) {
+    raindrops.clear();
+    gameover=1;
+    fill(255);
+    score = 0;
+   
+  }
 }
