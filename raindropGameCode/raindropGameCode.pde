@@ -1,5 +1,6 @@
 int score=0;
 int count=100;
+int gameover;
 PVector mouse; //delare a P
 ArrayList <Raindrop> raindrops = new ArrayList();
 //Raindrop[] r = new Raindrop[count];      //declare a new Raindrop called r
@@ -12,40 +13,54 @@ Catcher c;
 
 void setup() {
   size(1200, 800);
+  gameover=1;
   imageMode(CENTER);
-  
- mouse = new PVector();
-c = new Catcher();
-raindrops.add(new Raindrop(mouseX,mouseY));
-//for(int i = 0; i <count; i++){//initialize mouse PVector. value is irrelevant since it will be set at the start of void draw(){}
-//  r[i] = new Raindrop(random(width), 0);
+  mouse = new PVector();
+  c = new Catcher();
+  raindrops.add(new Raindrop(mouseX, mouseY));
+  //for(int i = 0; i <count; i++){//initialize mouse PVector. value is irrelevant since it will be set at the start of void draw(){}
+  //  r[i] = new Raindrop(random(width), 0);
 }//Initialize r. The parameters used are the initial x and y positions
 
 
 void draw() {
+ if (gameover == 1){
   mouse.set(mouseX, mouseY);//set value of mouse as mouseX,mouseY
   background(0, 200, 255);
   textSize(100);
-  text(score, width/2,height/3);
-  raindrops.add(new Raindrop(random(width),0));
+  text(score, width/2, height/3);
+  raindrops.add(new Raindrop(random(width), 0));
   c.update();
   c.display();
-  for(int i = raindrops.size()-1; i >= 0; i--){
+  for (int i = raindrops.size()-1; i >= 0; i--) {
     Raindrop r = raindrops.get(i);
     r.display();
     r.fall();
 
-    
-    if(r.isInContactWith(mouse)){
+
+
+    if (r.isInContactWith(mouse)) {
       raindrops.remove(i);
-     
     }
-   
+    if (r.loc.y > height + r.diam/2){
+      r.reset();
+      score = score +1;
+    }
   }
+    if (score==51){
+      gameover= 0;
+      textSize(200);
+      fill(#FF0808);
+      textAlign(CENTER);
+      text("GAME OVER", width/2, height/2);
+    
+    }
+    
+ }
   //for(int i = 0; i < count; i++){
   //r[i].fall();         //make the raindrop fall. It should accelerate as if pulled towards the ground by earth's gravity
   //r[i].display();  
- ////display the raindrop
+  ////display the raindrop
   //if (r[i].isInContactWith(mouse)) {      //check to see if the raindrop is in contact with the point represented by the PVector called mouse
   //  r[i].reset();                         //if it is, reset the raindrop
   //}
@@ -53,4 +68,8 @@ void draw() {
   //  r[i].reset();                           //if it does, reset the raindrop
   //}
   //}
+     if(mousePressed){
+       gameover=1;
+       score = 0;
+     }
 }
